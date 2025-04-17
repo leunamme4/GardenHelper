@@ -1,4 +1,4 @@
-package com.example.gardenhelper
+package com.example.gardenhelper.ui
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.gardenhelper.R
 import com.example.gardenhelper.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -31,5 +32,9 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        if (savedInstanceState == null) {
+            navView.setSelectedItemId(R.id.navigation_home); // change to whichever id should be default
+        }
     }
 }
