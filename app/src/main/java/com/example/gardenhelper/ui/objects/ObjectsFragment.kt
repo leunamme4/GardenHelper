@@ -1,4 +1,4 @@
-package com.example.gardenhelper.ui.notifications
+package com.example.gardenhelper.ui.objects
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.gardenhelper.databinding.FragmentNotificationsBinding
+import com.example.gardenhelper.databinding.FragmentObjectsBinding
 
-class NotificationsFragment : Fragment() {
+class ObjectsFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentObjectsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val objectsViewModel =
+            ViewModelProvider(this).get(ObjectsViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentObjectsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        objectsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

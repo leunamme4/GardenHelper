@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_garden_list">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.gardenhelper.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_calendar"
+        android:name="com.example.gardenhelper.ui.calendar.CalendarFragment"
+        android:label="@string/title_calendar"
+        tools:layout="@layout/fragment_calendar" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.gardenhelper.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_garden_list"
+        android:name="com.example.gardenhelper.ui.garden.GardenListFragment"
+        android:label="@string/title_garden_list"
+        tools:layout="@layout/fragment_garden_list" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.gardenhelper.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_objects"
+        android:name="com.example.gardenhelper.ui.objects.ObjectsFragment"
+        android:label="@string/title_objects"
+        tools:layout="@layout/fragment_objects" />
 </navigation>

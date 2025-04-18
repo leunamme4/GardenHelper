@@ -27,14 +27,14 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_calendar, R.id.navigation_garden_list, R.id.navigation_objects
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         if (savedInstanceState == null) {
-            navView.setSelectedItemId(R.id.navigation_home); // change to whichever id should be default
+            navView.setSelectedItemId(R.id.navigation_garden_list); // change to whichever id should be default
         }
     }
 }

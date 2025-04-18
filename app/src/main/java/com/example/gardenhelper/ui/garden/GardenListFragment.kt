@@ -1,4 +1,4 @@
-package com.example.gardenhelper.ui.dashboard
+package com.example.gardenhelper.ui.garden
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.gardenhelper.databinding.FragmentDashboardBinding
+import com.example.gardenhelper.databinding.FragmentGardenListBinding
 
-class DashboardFragment : Fragment() {
+class GardenListFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentGardenListBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val gardenListViewModel =
+            ViewModelProvider(this).get(GardenListViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentGardenListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        gardenListViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
