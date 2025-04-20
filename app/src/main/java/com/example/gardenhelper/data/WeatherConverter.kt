@@ -4,10 +4,10 @@ import com.example.gardenhelper.data.dto.ConditionDto
 import com.example.gardenhelper.data.dto.CurrentWeatherDto
 import com.example.gardenhelper.data.dto.CurrentWeatherResponseDto
 import com.example.gardenhelper.data.dto.LocationDto
-import com.example.gardenhelper.domain.models.Condition
-import com.example.gardenhelper.domain.models.CurrentWeather
-import com.example.gardenhelper.domain.models.CurrentWeatherResponse
-import com.example.gardenhelper.domain.models.Location
+import com.example.gardenhelper.domain.models.weather.Condition
+import com.example.gardenhelper.domain.models.weather.CurrentWeather
+import com.example.gardenhelper.domain.models.weather.CurrentWeatherResponse
+import com.example.gardenhelper.domain.models.weather.Location
 
 class WeatherConverter {
 

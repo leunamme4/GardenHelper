@@ -9,7 +9,11 @@
         android:id="@+id/navigation_calendar"
         android:name="com.example.gardenhelper.ui.calendar.CalendarFragment"
         android:label="@string/title_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_navigation_calendar_to_calendarDayFragment"
+            app:destination="@id/calendarDayFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_garden_list"
@@ -22,4 +26,9 @@
         android:name="com.example.gardenhelper.ui.objects.ObjectsFragment"
         android:label="@string/title_objects"
         tools:layout="@layout/fragment_objects" />
+    <fragment
+        android:id="@+id/calendarDayFragment"
+        android:name="com.example.gardenhelper.ui.calendar.calendar_day.CalendarDayFragment"
+        android:label="fragment_calendar_day"
+        tools:layout="@layout/fragment_calendar_day" />
 </navigation>

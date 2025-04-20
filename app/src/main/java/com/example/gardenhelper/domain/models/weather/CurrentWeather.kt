@@ -1,6 +1,4 @@
-package com.example.gardenhelper.domain.models
-
-import com.example.gardenhelper.data.dto.ConditionDto
+package com.example.gardenhelper.domain.models.weather
 
 class CurrentWeather(
     val cloud: Int,

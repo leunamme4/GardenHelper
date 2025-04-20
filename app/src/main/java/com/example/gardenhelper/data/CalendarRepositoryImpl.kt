@@ -1,11 +1,9 @@
 package com.example.gardenhelper.data
 
 import com.example.gardenhelper.data.api.NetworkClient
-import com.example.gardenhelper.data.dto.CurrentWeatherDto
 import com.example.gardenhelper.domain.api.CalendarRepository
-import com.example.gardenhelper.domain.models.CurrentWeather
 import com.example.gardenhelper.data.network.Result
-import com.example.gardenhelper.domain.models.CurrentWeatherResponse
+import com.example.gardenhelper.domain.models.weather.CurrentWeatherResponse
 
 class CalendarRepositoryImpl(private val networkClient: NetworkClient, private val converter: WeatherConverter): CalendarRepository {
 

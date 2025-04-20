@@ -12,20 +12,20 @@ import kotlinx.coroutines.launch
 
 class CalendarViewModel(private val calendarInteractor: CalendarInteractor) : ViewModel() {
 
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            val weather = calendarInteractor.getCurrentWeather("Paris")
-            Log.d("weather", "$weather")
-            when (weather) {
-                is Result.Success -> {
-                    _weather.postValue(WeatherState.Content(weather.data))
-                }
-
-                is Result.Error -> _weather.postValue(WeatherState.Empty)
-                Result.NetworkError -> _weather.postValue(WeatherState.Empty)
-            }
-        }
-    }
+//    init {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val weather = calendarInteractor.getCurrentWeather("Paris")
+//            Log.d("weather", "$weather")
+//            when (weather) {
+//                is Result.Success -> {
+//                    _weather.postValue(WeatherState.Content(weather.data))
+//                }
+//
+//                is Result.Error -> _weather.postValue(WeatherState.Empty)
+//                Result.NetworkError -> _weather.postValue(WeatherState.Empty)
+//            }
+//        }
+//    }
 
     private val _weather = MutableLiveData<WeatherState>()
     val weather: LiveData<WeatherState> = _weather

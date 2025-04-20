@@ -1,4 +1,4 @@
-package com.example.gardenhelper.domain.models
+package com.example.gardenhelper.domain.models.weather
 
 data class Condition(
     val code: Int,

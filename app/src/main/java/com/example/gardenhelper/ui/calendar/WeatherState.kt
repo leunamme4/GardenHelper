@@ -1,6 +1,6 @@
 package com.example.gardenhelper.ui.calendar
 
-import com.example.gardenhelper.domain.models.CurrentWeatherResponse
+import com.example.gardenhelper.domain.models.weather.CurrentWeatherResponse
 
 sealed class WeatherState {
     data object Empty : WeatherState()
