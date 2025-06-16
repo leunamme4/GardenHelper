@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/note_shape"
+    android:paddingTop="@dimen/padding_16"
+    android:layout_marginBottom="@dimen/padding_16">
+
+    <TextView
+        android:id="@+id/note_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/edit"
+        android:textColor="@color/text_black"
+        android:layout_marginStart="@dimen/padding_16"
+        android:textSize="@dimen/text_22"
+        android:fontFamily="@font/ys_text_regular"
+        android:textFontWeight="600"
+        android:layout_marginBottom="@dimen/padding_8"
+        tools:text="TEST"/>
+
+    <ImageButton
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_delete"
+        android:backgroundTint="@color/background_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/padding_8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/edit_button"
+        android:backgroundTint="@color/background_color"
+        app:layout_constraintEnd_toStartOf="@id/delete"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:tint="@color/btn_green" />
+
+    <TextView
+        android:id="@+id/notification_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/note_header"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/padding_16"
+        android:paddingBottom="@dimen/padding_8"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_14"
+        android:textFontWeight="400"
+        tools:text="test"/>
+
+    <TextView
+        android:id="@+id/notification_active"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/notification_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/padding_16"
+        android:paddingBottom="@dimen/padding_8"
+        android:textColor="@color/light_gray"
+        android:textSize="@dimen/text_14"
+        android:textFontWeight="400"
+        tools:text="Активно"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

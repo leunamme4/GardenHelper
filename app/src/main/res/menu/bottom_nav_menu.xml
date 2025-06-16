@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/navigation_calendar"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/icon_calendar"
         android:title="@string/title_calendar" />
 
     <item
         android:id="@+id/navigation_garden_list"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/icon_garden"
         android:title="@string/title_garden_list" />
 
     <item
         android:id="@+id/navigation_objects"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/icon_plant"
         android:title="@string/title_objects" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/settingoutlined"
+        android:title="@string/title_settings" />
 
 </menu>

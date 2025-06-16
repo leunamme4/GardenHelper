@@ -19,16 +19,127 @@
         android:id="@+id/navigation_garden_list"
         android:name="com.example.gardenhelper.ui.garden.GardenListFragment"
         android:label="@string/title_garden_list"
-        tools:layout="@layout/fragment_garden_list" />
+        tools:layout="@layout/fragment_garden_list" >
+        <action
+            android:id="@+id/action_navigation_garden_list_to_gardenScheme"
+            app:destination="@id/gardenScheme" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_objects"
         android:name="com.example.gardenhelper.ui.objects.ObjectsFragment"
         android:label="@string/title_objects"
-        tools:layout="@layout/fragment_objects" />
+        tools:layout="@layout/fragment_objects" >
+        <action
+            android:id="@+id/action_navigation_objects_to_objectFragment"
+            app:destination="@id/objectFragment" />
+        <action
+            android:id="@+id/action_navigation_objects_to_createObject"
+            app:destination="@id/createObject" />
+    </fragment>
     <fragment
         android:id="@+id/calendarDayFragment"
         android:name="com.example.gardenhelper.ui.calendar.calendar_day.CalendarDayFragment"
         android:label="fragment_calendar_day"
-        tools:layout="@layout/fragment_calendar_day" />
+        tools:layout="@layout/fragment_calendar_day" >
+        <action
+            android:id="@+id/action_calendarDayFragment_to_createNote"
+            app:destination="@id/createNote" />
+        <action
+            android:id="@+id/action_calendarDayFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.gardenhelper.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.gardenhelper.ui.settings.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.gardenhelper.ui.settings.auth.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/gardenScheme"
+        android:name="com.example.gardenhelper.ui.garden.garden_scheme.GardenSchemeFragment"
+        android:label="fragment_garden_scheme"
+        tools:layout="@layout/fragment_garden_scheme" >
+        <action
+            android:id="@+id/action_gardenScheme_to_objectFragment"
+            app:destination="@id/objectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createObject"
+        android:name="com.example.gardenhelper.ui.objects.create_object.CreateObjectFragment"
+        android:label="fragment_create_object"
+        tools:layout="@layout/fragment_create_object" >
+        <action
+            android:id="@+id/action_createObject_to_createNote"
+            app:destination="@id/createNote" />
+        <action
+            android:id="@+id/action_createObject_to_createNotification"
+            app:destination="@id/createNotification" />
+    </fragment>
+    <fragment
+        android:id="@+id/objectFragment"
+        android:name="com.example.gardenhelper.ui.objects.object.ObjectFragment"
+        android:label="fragment_object"
+        tools:layout="@layout/fragment_object" >
+        <action
+            android:id="@+id/action_objectFragment_to_createObject"
+            app:destination="@id/createObject" />
+        <action
+            android:id="@+id/action_objectFragment_to_createNote"
+            app:destination="@id/createNote" />
+        <action
+            android:id="@+id/action_objectFragment_to_createNotification"
+            app:destination="@id/createNotification" />
+        <action
+            android:id="@+id/action_objectFragment_to_editNotificationFragment"
+            app:destination="@id/editNotificationFragment" />
+        <action
+            android:id="@+id/action_objectFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
+        <action
+            android:id="@+id/action_objectFragment_to_editObjectFragment"
+            app:destination="@id/editObjectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createNote"
+        android:name="com.example.gardenhelper.ui.notes.create_note.CreateNoteFragment"
+        android:label="fragment_create_note"
+        tools:layout="@layout/fragment_create_note" />
+    <fragment
+        android:id="@+id/createNotification"
+        android:name="com.example.gardenhelper.ui.notifications.create_notification.CreateNotificationFragment"
+        android:label="fragment_create_notification"
+        tools:layout="@layout/fragment_create_notification" />
+    <fragment
+        android:id="@+id/editNotificationFragment"
+        android:name="com.example.gardenhelper.ui.notifications.edit_notification.EditNotificationFragment"
+        android:label="fragment_edit_notification"
+        tools:layout="@layout/fragment_edit_notification" />
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.example.gardenhelper.ui.notes.edit_note.EditNoteFragment"
+        android:label="fragment_edit_note"
+        tools:layout="@layout/fragment_edit_note" />
+    <fragment
+        android:id="@+id/editObjectFragment"
+        android:name="com.example.gardenhelper.ui.objects.edit_object.EditObjectFragment"
+        android:label="fragment_edit_object"
+        tools:layout="@layout/fragment_edit_object" />
 </navigation>

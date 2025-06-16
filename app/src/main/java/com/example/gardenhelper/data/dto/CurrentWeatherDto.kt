@@ -2,7 +2,7 @@ package com.example.gardenhelper.data.dto
 
 class CurrentWeatherDto(
     val cloud: Int,
-    val conditionDto: ConditionDto,
+    val condition: ConditionDto,
     val feelslike_c: Double,
     val feelslike_f: Double,
     val gust_kph: Double,

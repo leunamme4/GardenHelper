@@ -14,7 +14,7 @@ class RetrofitNetworkClient(private val weatherApi: WeatherApi): NetworkClient {
         return withContext(Dispatchers.IO) {
             try {
                 val response =
-                    weatherApi.getCurrentWeather(coords, "87d4f25962514a74a1d105852251704")
+                    weatherApi.getCurrentWeather(coords, "")
 
                 if (response.isSuccessful) {
                     Result.Success(response.body()!!)
@@ -22,7 +22,7 @@ class RetrofitNetworkClient(private val weatherApi: WeatherApi): NetworkClient {
                     val errorJson = response.errorBody()?.string()
                     val error = Gson().fromJson(errorJson, ErrorResponse::class.java)
                     Result.Error(
-                        message = error.message ?: "Не удалось разобрать ошибку",
+                        message = error.message,
                         code = error.code
                     )
                 }

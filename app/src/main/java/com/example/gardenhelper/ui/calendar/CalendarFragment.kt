@@ -5,9 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.gardenhelper.R
 import com.example.gardenhelper.databinding.FragmentCalendarBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class CalendarFragment : Fragment() {
 
@@ -18,6 +24,8 @@ class CalendarFragment : Fragment() {
 
     private val viewModel by viewModel<CalendarViewModel>()
 
+    private lateinit var actualDate: String
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,7 +35,6 @@ class CalendarFragment : Fragment() {
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
         return root
     }
 
@@ -36,24 +43,43 @@ class CalendarFragment : Fragment() {
 
         calendar = binding.calendar
 
-        calendar.setOnDateChangeListener { view, year, month, day ->
-            ///
+        binding.btnCalendarDay.setOnClickListener {
+
+            val bundle = Bundle().apply {
+                putString(DATE, actualDate)
+            }
+            findNavController().navigate(
+                R.id.action_navigation_calendar_to_calendarDayFragment,
+                bundle
+            )
         }
 
-        binding.btnCalendarDay.setOnClickListener {
-            ///
+        binding.calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            onCalendarChanged(year, month, dayOfMonth)
         }
 
         viewModel.weather.observe(viewLifecycleOwner) {
-            when (it) {
-                is WeatherState.Content -> {}
-                WeatherState.Empty -> {}
-            }
+            binding.btnCalendarDay.isVisible = it
         }
+    }
+
+    private fun onCalendarChanged(year: Int, month: Int, dayOfMonth: Int) {
+        val calendar = Calendar.getInstance().apply {
+            set(year, month, dayOfMonth)
+        }
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val formattedDate = dateFormat.format(calendar.time)
+        actualDate = formattedDate
+
+        viewModel.hasWeather(formattedDate)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val DATE = "date"
     }
 }

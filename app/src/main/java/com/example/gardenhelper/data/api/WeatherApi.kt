@@ -13,3 +13,6 @@ interface WeatherApi {
         @Query("key") apiKey: String
     ): Response<CurrentWeatherResponseDto>
 }
+
+
+

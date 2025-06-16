@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_options">
+        <item>Растение</item>
+        <item>Строение</item>
+    </string-array>
+</resources>
