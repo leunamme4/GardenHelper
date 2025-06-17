@@ -1,4 +1,4 @@
-package com.example.gardenhelper
+package com.example.gardenhelper.repositories_mock_tests
 
 import com.example.gardenhelper.data.db.AppDatabase
 import com.example.gardenhelper.data.db.EntityConverter
