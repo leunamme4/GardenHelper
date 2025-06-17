@@ -32,4 +32,11 @@ class GardenListViewModel(private val gardenInteractor: GardenInteractor) : View
             getGardens()
         }
     }
+
+    fun deleteGarden(id: Int) {
+        viewModelScope.launch {
+            gardenInteractor.deleteGarden(id)
+            getGardens()
+        }
+    }
 }

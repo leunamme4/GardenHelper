@@ -32,14 +32,14 @@
         android:id="@+id/field_control_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Управление полем"
-        android:textSize="@dimen/text_16"
-        android:fontFamily="@font/ys_display_bold"
         android:layout_marginStart="@dimen/padding_8"
         android:layout_marginTop="@dimen/padding_8"
-        android:textColor="@color/text_black"/>
+        android:fontFamily="@font/ys_display_bold"
+        android:text="Управление полем"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Панель управления размером поля -->
     <LinearLayout
@@ -106,13 +106,13 @@
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/save"
-        android:backgroundTint="@color/btn_green"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/background_color"
-        android:background="@drawable/rounded_corners_buttons"
         android:layout_marginTop="@dimen/padding_8"
         android:layout_marginEnd="@dimen/padding_8"
+        android:background="@drawable/rounded_corners_buttons"
+        android:backgroundTint="@color/btn_green"
+        android:src="@drawable/save"
+        android:textColor="@color/background_color"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/fieldControls" />
 
     <!--    <HorizontalScrollView-->
@@ -145,6 +145,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fieldControls">
+
         <FrameLayout
             android:id="@+id/field"
             android:layout_width="400dp"
@@ -159,82 +160,99 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/padding_16"
+        android:layout_marginBottom="@dimen/padding_16"
         android:background="@android:color/transparent"
         android:backgroundTint="@color/background_color"
         android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toTopOf="@id/controlPanel"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="@dimen/padding_16"
-        android:layout_marginEnd="@dimen/padding_16"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Панель управления иконками-->
-    <LinearLayout
+    <HorizontalScrollView
         android:id="@+id/controlPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding_8"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/field_container">
 
-        <ImageButton
-            android:id="@+id/selectedIcon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:background="@color/background_color"
-            android:layout_marginStart="@dimen/padding_8"
-            android:layout_marginBottom="@dimen/padding_8"
-            android:layout_marginEnd="@dimen/padding_16"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/decreaseWidth"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/btn_green"
-            android:text="-"
-            android:textColor="@color/background_color" />
-
-        <TextView
-            android:id="@+id/widthText"
+        <LinearLayout
+            android:id="@+id/controlPanel_lin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ширина"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/text_16" />
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_8">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/increaseWidth"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/padding_16"
-            android:backgroundTint="@color/btn_green"
-            android:text="+"
-            android:textColor="@color/background_color" />
+            <ImageButton
+                android:id="@+id/selectedIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="@dimen/padding_8"
+                android:layout_marginEnd="@dimen/padding_16"
+                android:layout_marginBottom="@dimen/padding_8"
+                android:background="@color/background_color" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/decreaseHeight"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/btn_green"
-            android:text="-"
-            android:textColor="@color/background_color" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/decreaseWidth"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/btn_green"
+                android:text="-"
+                android:textColor="@color/background_color" />
 
-        <TextView
-            android:id="@+id/heightText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Длина"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/text_16" />
+            <TextView
+                android:id="@+id/widthText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ширина"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_16" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/increaseHeight"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/btn_green"
-            android:text="+"
-            android:textColor="@color/background_color" />
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/increaseWidth"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/padding_16"
+                android:backgroundTint="@color/btn_green"
+                android:text="+"
+                android:textColor="@color/background_color" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/decreaseHeight"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/btn_green"
+                android:text="-"
+                android:textColor="@color/background_color" />
+
+            <TextView
+                android:id="@+id/heightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Высота"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_16" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/increaseHeight"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/btn_green"
+                android:text="+"
+                android:textColor="@color/background_color" />
+
+            <ImageButton
+                android:id="@+id/delete_object"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/padding_8"
+                android:layout_marginEnd="@dimen/padding_16"
+                android:layout_marginBottom="@dimen/padding_8"
+                android:background="@color/background_color"
+                android:src="@drawable/ic_delete_garden_object" />
+        </LinearLayout>
+    </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,8 +40,6 @@ class GardenSchemeFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private var lockRestore = false
-
     private var selectedView: ImageView? = null
     private var selectedObjectId = 0
     private val iconModels = mutableListOf<ObjectSizes>()
@@ -102,6 +100,17 @@ class GardenSchemeFragment : Fragment() {
 
         binding.saveButton.setOnClickListener {
             viewModel.saveGarden(iconModels, binding.field.width, binding.field.height, true)
+        }
+
+        binding.deleteObject.setOnClickListener {
+            binding.field.removeView(selectedView)
+            selectedView = null
+            for (obj in iconModels) {
+                if (obj.id == selectedObjectId) {
+                    iconModels.remove(obj)
+                    break
+                }
+            }
         }
 
         binding.selectedIcon.setOnClickListener {

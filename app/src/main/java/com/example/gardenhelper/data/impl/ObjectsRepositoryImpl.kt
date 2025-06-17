@@ -23,6 +23,18 @@ class ObjectsRepositoryImpl(
     }
 
     override suspend fun deleteObject(id: Int) {
+        val gardenObject = database.gardenObjectDao().getObjectById(id)
+        if (gardenObject.notes.isNotEmpty()) {
+            for (note in gardenObject.notes) {
+                database.notesDao().deleteNote(id)
+            }
+        }
+        if (gardenObject.notifications.isNotEmpty()) {
+            for (note in gardenObject.notifications) {
+                database.notificationsDao().deleteNotification(id)
+            }
+        }
+
         database.gardenObjectDao().deleteObject(id)
     }
 

@@ -1,5 +1,6 @@
 package com.example.gardenhelper.ui.objects
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,28 +46,6 @@ class ObjectsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Тестовые данные
-//        val testObjects = listOf(
-//            GardenObject(
-//                name = "Помидор",
-//                type = "Растение",
-//                description = "Красивое цветущее растение с приятным ароматом",
-//                icon = R.drawable.ic_tomato // замените на реальную ссылку
-//            ),
-//            GardenObject(
-//                name = "Дом",
-//                type = "Строение",
-//                description = "Деревянная беседка для отдыха в саду",
-//                icon = R.drawable.ic_housewithgarden // замените на реальную ссылку
-//            ),
-//            GardenObject(
-//                name = "Скамейка",
-//                type = "Строение",
-//                description = "Металлическая скамейка с деревянными сиденьями",
-//                icon = R.drawable.ic_bench // замените на реальную ссылку
-//            )
-//        )
-
         viewModel.myObjects.observe(viewLifecycleOwner) { gardenObjects ->
             render(gardenObjects)
         }
@@ -94,15 +73,32 @@ class ObjectsFragment : Fragment() {
     private fun render(state: ObjectsState) {
         when(state) {
             is ObjectsState.Content -> {
-                adapter = ObjectsAdapter(state.objects) { gardenObject ->
-                    val bundle = Bundle().apply {
-                        putInt(OBJECT_ID, gardenObject.id)
+                adapter = ObjectsAdapter(
+                    state.objects,
+                    onItemClick = { gardenObject ->
+                        val bundle = Bundle().apply {
+                            putInt(OBJECT_ID, gardenObject.id)
+                        }
+                        findNavController().navigate(
+                            R.id.action_navigation_objects_to_objectFragment,
+                            bundle
+                        )
+                    },
+                    onLongClick = { gardenObject ->
+                        AlertDialog.Builder(context)
+                            .setTitle("Удалить объект")
+                            .setMessage("Вы уверены, что хотите удалить этот объект? Это действие нельзя отменить.")
+                            .setPositiveButton("Удалить") { dialog, _ ->
+                                // Здесь логика удаления объекта
+                                viewModel.deleteObject(gardenObject.id)
+                                dialog.dismiss()
+                            }
+                            .setNegativeButton("Отмена") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
                     }
-                    findNavController().navigate(
-                        R.id.action_navigation_objects_to_objectFragment,
-                        bundle
-                    )
-                }
+                )
                 binding.rv.adapter = adapter
             }
             ObjectsState.Empty -> {}

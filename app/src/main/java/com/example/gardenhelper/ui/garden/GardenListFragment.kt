@@ -63,7 +63,7 @@ class GardenListFragment : Fragment() {
 
     private fun render(state: GardenListState) {
         if (state is GardenListState.Content) {
-            adapter = GardenListAdapter(state.objects) { id ->
+            adapter = GardenListAdapter(state.objects, onItemClick = { id ->
                 val bundle = Bundle().apply {
                     putInt(GARDEN_ID, id)
                 }
@@ -71,7 +71,19 @@ class GardenListFragment : Fragment() {
                     R.id.action_navigation_garden_list_to_gardenScheme,
                     bundle
                 )
-            }
+            }, onLongClick = { id ->
+                AlertDialog.Builder(context)
+                    .setTitle("Удалить объект")
+                    .setMessage("Вы уверены, что хотите удалить схему участка? Это действие нельзя отменить.")
+                    .setPositiveButton("Удалить") { dialog, _ ->
+                        viewModel.deleteGarden(id)
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("Отмена") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            })
             binding.rv.adapter = adapter
         }
     }

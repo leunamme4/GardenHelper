@@ -12,7 +12,8 @@ import com.example.gardenhelper.domain.models.garden.GardenObject
 
 class ObjectsAdapter(
     private val objects: List<GardenObject>,
-    private val onItemClick: (GardenObject) -> Unit
+    private val onItemClick: (GardenObject) -> Unit,
+    private val onLongClick: (GardenObject) -> Unit = {}
 ) : RecyclerView.Adapter<ObjectsAdapter.GardenObjectViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GardenObjectViewHolder {
@@ -39,9 +40,14 @@ class ObjectsAdapter(
                 .into(iconImageView)
 
             nameTextView.text = gardenObject.name
-            descriptionTextView.text = "Тип: ${gardenObject.type},\nзаметки: ${gardenObject.notes.size}, напоминания: ${gardenObject.notifications.size}"
+            descriptionTextView.text =
+                "Тип: ${gardenObject.type},\nзаметки: ${gardenObject.notes.size}, напоминания: ${gardenObject.notifications.size}"
 
             itemView.setOnClickListener { onItemClick(gardenObject) }
+            itemView.setOnLongClickListener {
+                onLongClick(gardenObject)
+                true
+            }
         }
     }
 }

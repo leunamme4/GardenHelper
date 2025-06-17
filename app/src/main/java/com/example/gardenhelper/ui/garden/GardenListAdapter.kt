@@ -12,7 +12,8 @@ import com.example.gardenhelper.domain.models.garden.Garden
 
 class GardenListAdapter(
     private val objects: List<Garden>,
-    private val onItemClick: (Int) -> Unit
+    private val onItemClick: (Int) -> Unit,
+    private val onLongClick: (Int) -> Unit
 ) : RecyclerView.Adapter<GardenListAdapter.GardenListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GardenListViewHolder {
@@ -40,9 +41,24 @@ class GardenListAdapter(
 
             nameTextView.text = gardenObject.name
             descriptionTextView.text =
-                "${gardenObject.objects.size} объектов"
+                "${gardenObject.objects.size} ${getObjectWordForm(gardenObject.objects.size)}"
 
             itemView.setOnClickListener { onItemClick(gardenObject.id) }
+            itemView.setOnLongClickListener {
+                onLongClick(gardenObject.id)
+                true
+            }
         }
+
+        private fun getObjectWordForm(count: Int): String {
+            val mod10 = count % 10
+            val mod100 = count % 100
+            return when {
+                mod10 == 1 && mod100 != 11 -> "объект"
+                mod10 in 2..4 && (mod100 !in 12..14) -> "объекта"
+                else -> "объектов"
+            }
+        }
+
     }
 }

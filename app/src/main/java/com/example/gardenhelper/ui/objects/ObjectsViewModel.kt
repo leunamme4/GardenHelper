@@ -27,6 +27,13 @@ class ObjectsViewModel(private val objectsInteractor: ObjectsInteractor) : ViewM
         }
     }
 
+    fun deleteObject(id: Int) {
+        viewModelScope.launch {
+            objectsInteractor.deleteObject(id)
+            getObjects()
+        }
+    }
+
     fun searchObjectsByName(query: String) {
         if (gardenObjects.isNotEmpty()) {
             val foundedObjects = mutableListOf<GardenObject>()
