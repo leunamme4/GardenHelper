@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.calendar.CalendarFragment"
+    android:background="@color/background_color">
+
+   <TextView
+       android:id="@+id/action_bar"
+       android:layout_width="wrap_content"
+       android:layout_height="@dimen/size_50"
+       android:background="@color/background_color"
+       android:gravity="center"
+       android:paddingStart="@dimen/padding_16"
+       android:text="@string/calendar"
+       android:fontFamily="@font/ys_display_medium"
+       android:textColor="@color/text_black"
+       android:textFontWeight="600"
+       android:textSize="@dimen/text_22"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       />
+
+   <CalendarView
+       android:id="@+id/calendar"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       app:layout_constraintTop_toBottomOf="@id/action_bar"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:layout_marginTop="30dp"
+       android:background="@color/background_color"
+       android:theme="@style/CalendarViewStyle"
+       android:dateTextAppearance="@style/CalendarDateText"
+       android:weekDayTextAppearance="@style/CalendarWeekDayText"
+       android:weekSeparatorLineColor="@color/btn_green"
+       />
+
+   <ImageButton
+       android:id="@+id/btn_calendar_day"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/edit_button"
+       style="@style/Button"
+       app:layout_constraintTop_toBottomOf="@id/calendar"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:layout_marginEnd="10dp"
+       android:layout_marginBottom="@dimen/padding_8"
+       android:visibility="gone"
+       />
+</androidx.constraintlayout.widget.ConstraintLayout>
