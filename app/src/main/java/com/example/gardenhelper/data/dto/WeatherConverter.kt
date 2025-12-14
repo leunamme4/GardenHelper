@@ -26,7 +26,7 @@ class WeatherConverter {
     }
 
 
-    private fun mapCurrentWeather(weather: CurrentWeatherDto): CurrentWeather {
+    fun mapCurrentWeather(weather: CurrentWeatherDto): CurrentWeather {
         return weather.run {
             CurrentWeather(
                 cloud = cloud,
@@ -56,7 +56,7 @@ class WeatherConverter {
         }
     }
 
-    private fun mapCurrentWeatherBack(weather: CurrentWeather): CurrentWeatherDto {
+    fun mapCurrentWeatherBack(weather: CurrentWeather): CurrentWeatherDto {
         return weather.run {
             CurrentWeatherDto(
                 cloud = cloud,
@@ -86,7 +86,7 @@ class WeatherConverter {
         }
     }
 
-    private fun mapCondition(dto: ConditionDto): Condition {
+    fun mapCondition(dto: ConditionDto): Condition {
         return dto.run {
             Condition(
                 code = code,
@@ -96,7 +96,7 @@ class WeatherConverter {
         }
     }
 
-    private fun mapConditionBack(condition: Condition): ConditionDto {
+    fun mapConditionBack(condition: Condition): ConditionDto {
         return condition.run {
             ConditionDto(
                 code = code,
@@ -106,7 +106,7 @@ class WeatherConverter {
         }
     }
 
-    private fun mapLocation(dto: LocationDto): Location {
+    fun mapLocation(dto: LocationDto): Location {
         return dto.run {
             Location(
                 name = name,
@@ -121,7 +121,7 @@ class WeatherConverter {
         }
     }
 
-    private fun mapLocationBack(location: Location): LocationDto {
+    fun mapLocationBack(location: Location): LocationDto {
         return location.run {
             LocationDto(
                 name = name,

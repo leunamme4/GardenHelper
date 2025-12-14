@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "837179597008",
+    "project_id": "gardenhelper-22b0f",
+    "storage_bucket": "gardenhelper-22b0f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837179597008:android:67e833110d5d527df0bed5",
+        "android_client_info": {
+          "package_name": "com.example.gardenhelper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHB8_GH0RHYX7LrKpLb1VdxDggioPxnco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

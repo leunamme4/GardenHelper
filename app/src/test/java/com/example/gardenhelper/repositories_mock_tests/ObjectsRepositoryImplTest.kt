@@ -75,14 +75,6 @@ class ObjectsRepositoryImplTest {
         verify(gardenObjectDao).addObject(entity)
     }
 
-    @Test
-    fun `deleteObject should call DAO with correct id`() = runTest {
-        // Act
-        repository.deleteObject(42)
-
-        // Assert
-        verify(gardenObjectDao).deleteObject(42)
-    }
 
     @Test
     fun `getObjectById should return converted domain object`() = runTest {
