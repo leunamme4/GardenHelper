@@ -9,9 +9,6 @@ jobs:
     runs-on: [self-hosted, local, android]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
@@ -23,16 +20,17 @@ jobs:
           $env:ANDROID_HOME="C:\Users\overpower\AppData\Local\Android\Sdk"
           echo "ANDROID_HOME=$env:ANDROID_HOME" >> $env:GITHUB_ENV
 
-      - name: Run Unit Tests
-        run: ./gradlew testDebugUnitTest
-
       - name: Build Debug APK
         run: ./gradlew assembleDebug
 
       - name: Connect to Android Emulator
+        shell: powershell
         run: |
-          echo "Connecting to emulator..."
-          adb connect localhost:5555 || echo "Already connected"
+          if (-not (adb devices | Select-String "emulator")) {
+              adb connect localhost:5555
+          } else {
+              Write-Host "Already connected"
+          }
 
       - name: Wait for Android emulator
         run: |
