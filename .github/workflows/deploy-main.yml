@@ -1,0 +1,57 @@
+name: Android Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: [self-hosted, local, android]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Install Android SDK dependencies
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Run Unit Tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Connect to Android Emulator
+        run: |
+          echo "Connecting to emulator..."
+          adb connect localhost:5555 || echo "Already connected"
+
+      - name: Wait for Android emulator
+        run: |
+          echo "Waiting for emulator to be ready..."
+          for i in {1..30}; do
+            adb devices | grep emulator && break
+            echo "Emulator not ready, retry $i..."
+            sleep 5
+          done
+
+      - name: Install APK on emulator
+        run: |
+          APK_PATH=$(find ./app/build/outputs/apk/debug -name "*.apk" | head -n 1)
+          echo "Installing APK: $APK_PATH"
+          for i in {1..5}; do
+            adb install -r "$APK_PATH" && break
+            echo "Retry $i: install failed, retrying in 5s..."
+            sleep 5
+          done
