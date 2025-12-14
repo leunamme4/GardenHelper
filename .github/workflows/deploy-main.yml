@@ -9,6 +9,9 @@ jobs:
     runs-on: [self-hosted, local, android]
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
@@ -21,7 +24,8 @@ jobs:
           echo "ANDROID_HOME=$env:ANDROID_HOME" >> $env:GITHUB_ENV
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug
+        shell: powershell
+        run: .\gradlew assembleDebug
 
       - name: Connect to Android Emulator
         shell: powershell
@@ -32,21 +36,53 @@ jobs:
               Write-Host "Already connected"
           }
 
-      - name: Wait for Android emulator
+      - name: Wait for Android Emulator
+        shell: powershell
         run: |
-          echo "Waiting for emulator to be ready..."
-          for i in {1..30}; do
-            adb devices | grep emulator && break
-            echo "Emulator not ready, retry $i..."
-            sleep 5
-          done
+          $maxRetries = 30
+          $retry = 0
+          while ($retry -lt $maxRetries) {
+              $emulator = adb devices | Select-String "emulator"
+              if ($emulator) {
+                  Write-Host "Emulator is ready!"
+                  break
+              } else {
+                  Write-Host "Emulator not ready, retry $($retry + 1)..."
+                  Start-Sleep -Seconds 5
+                  $retry++
+              }
+          }
 
-      - name: Install APK on emulator
+          if (-not $emulator) {
+              Write-Host "Emulator did not become ready in time"
+              exit 1
+          }
+
+      - name: Install APK on Emulator
+        shell: powershell
         run: |
-          APK_PATH=$(find ./app/build/outputs/apk/debug -name "*.apk" | head -n 1)
-          echo "Installing APK: $APK_PATH"
-          for i in {1..5}; do
-            adb install -r "$APK_PATH" && break
-            echo "Retry $i: install failed, retrying in 5s..."
-            sleep 5
-          done
+          $apkPath = Get-ChildItem -Path .\app\build\outputs\apk\debug\*.apk | Select-Object -First 1
+          if (-not $apkPath) {
+              Write-Host "APK not found!"
+              exit 1
+          }
+
+          Write-Host "Installing APK: $($apkPath.FullName)"
+          $maxRetries = 5
+          $retry = 0
+          while ($retry -lt $maxRetries) {
+              $res = adb install -r $apkPath.FullName
+              if ($res -match "Success") {
+                  Write-Host "APK installed successfully!"
+                  break
+              } else {
+                  Write-Host "Retry $($retry + 1): install failed, retrying in 5s..."
+                  Start-Sleep -Seconds 5
+                  $retry++
+              }
+          }
+
+          if ($retry -eq $maxRetries) {
+              Write-Host "Failed to install APK after $maxRetries attempts"
+              exit 1
+          }
