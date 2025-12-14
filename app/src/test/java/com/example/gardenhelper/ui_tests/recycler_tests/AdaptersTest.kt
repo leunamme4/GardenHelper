@@ -62,7 +62,7 @@ class AdaptersTest {
 
     @Test
     fun `getItemCountObjects returns correct size`() {
-        val adapter = ObjectsAdapter(testObjects) {}
+        val adapter = ObjectsAdapter(testObjects, {})
         assertEquals(testObjects.size, adapter.itemCount)
     }
 }

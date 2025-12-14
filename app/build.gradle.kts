@@ -98,6 +98,6 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:5.2.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    testImplementation("io.insert-koin:koin-test:3.5.3")
-    testImplementation("io.insert-koin:koin-test-junit4:3.5.3")
+    testImplementation("io.insert-koin:koin-test:3.3.0")
+    testImplementation("io.insert-koin:koin-test-junit4:3.3.0")
 }
