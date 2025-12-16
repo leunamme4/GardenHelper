@@ -13,6 +13,8 @@ import com.example.gardenhelper.ui.objects.create_object.CreateObjectViewModel
 import com.example.gardenhelper.ui.objects.edit_object.EditObjectViewModel
 import com.example.gardenhelper.ui.objects.`object`.ObjectViewModel
 import com.example.gardenhelper.ui.settings.SettingsViewModel
+import com.example.gardenhelper.ui.settings.auth.AuthViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -67,5 +69,9 @@ val viewModel = module {
 
     viewModel {
         GardenListViewModel(get())
+    }
+
+    viewModel {
+        AuthViewModel(get(), androidContext())
     }
 }

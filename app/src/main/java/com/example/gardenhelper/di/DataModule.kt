@@ -2,6 +2,7 @@ package com.example.gardenhelper.di
 
 import androidx.room.Room
 import androidx.work.WorkManager
+import com.example.gardenhelper.data.api.AuthApi
 import com.example.gardenhelper.data.impl.CalendarRepositoryImpl
 import com.example.gardenhelper.data.dto.WeatherConverter
 import com.example.gardenhelper.data.api.NetworkClient
@@ -13,12 +14,14 @@ import com.example.gardenhelper.data.impl.GardenRepositoryImpl
 import com.example.gardenhelper.data.impl.NotesRepositoryImpl
 import com.example.gardenhelper.data.impl.NotificationsRepositoryImpl
 import com.example.gardenhelper.data.impl.ObjectsRepositoryImpl
+import com.example.gardenhelper.data.impl.ServerRepositoryImpl
 import com.example.gardenhelper.data.work_manager.WorkManagerScheduler
 import com.example.gardenhelper.domain.api.repositories.CalendarRepository
 import com.example.gardenhelper.domain.api.repositories.GardenRepository
 import com.example.gardenhelper.domain.api.repositories.NotesRepository
 import com.example.gardenhelper.domain.api.repositories.NotificationsRepository
 import com.example.gardenhelper.domain.api.repositories.ObjectsRepository
+import com.example.gardenhelper.domain.api.repositories.ServerRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -33,8 +36,17 @@ val dataModule = module {
             .create(WeatherApi::class.java)
     }
 
+    single<AuthApi> {
+        Retrofit.Builder()
+            .baseUrl("http://server:8080/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AuthApi::class.java)
+    }
+
     single<NetworkClient> {
-        RetrofitNetworkClient(get())
+        RetrofitNetworkClient(authApi = get<AuthApi>(),
+            weatherApi = get<WeatherApi>())
     }
 
     single {
@@ -63,6 +75,10 @@ val dataModule = module {
 
     single<NotificationsRepository> {
         NotificationsRepositoryImpl(get(), get())
+    }
+
+    single<ServerRepository> {
+        ServerRepositoryImpl(get())
     }
 
     single {

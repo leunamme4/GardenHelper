@@ -10,12 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gardenhelper.R
 import com.example.gardenhelper.databinding.FragmentLoginBinding
-import com.example.gardenhelper.databinding.FragmentSettingsBinding
 import com.example.gardenhelper.ui.MainActivity
-import com.google.firebase.auth.FirebaseAuth
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
-
+    private val viewModel by viewModel<AuthViewModel>()
     private var _binding: FragmentLoginBinding? = null
 
     private val binding get() = _binding!!
@@ -35,31 +34,43 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).hideNavigationBar()
 
+        viewModel.loginCompleted.observe(viewLifecycleOwner) { isCompleted ->
+            if (isCompleted) {
+                Toast.makeText(
+                    requireContext(),
+                    "Вход выаолнен успешно",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                findNavController().popBackStack()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Произошла ошибка, попробуйте снова",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
         binding.goToRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         binding.loginButton.setOnClickListener {
-            if (binding.emailFieldLogin.text.toString().isEmpty() || binding.passwordFieldLogin.text.toString().isEmpty()) {
-                Toast.makeText(requireContext(), "Логин и пароль не могут быть пустые", Toast.LENGTH_SHORT).show()
-            } else {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                    binding.emailFieldLogin.text.toString(),
-                    binding.passwordFieldLogin.text.toString()
-                ).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(requireContext(), "Вход выполнен успешно", Toast.LENGTH_SHORT).show()
-                        findNavController().popBackStack()
-                    } else {
-                        Toast.makeText(requireContext(), "Неправильные логин и пароль", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+            login()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         (activity as MainActivity).showNavigationBar()
+    }
+
+    fun login() {
+        if (binding.emailFieldLogin.text.toString().isEmpty() || binding.passwordFieldLogin.text.toString().isEmpty()) {
+            Toast.makeText(requireContext(), "Логин и пароль не могут быть пустые", Toast.LENGTH_SHORT).show()
+        } else {
+            viewModel.login(binding.emailFieldLogin.text.toString(),binding.passwordFieldLogin.text.toString())
+        }
     }
 }
