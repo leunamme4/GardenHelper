@@ -1,5 +1,6 @@
 package com.example.gardenhelper.data.network
 
+import android.util.Log
 import com.example.gardenhelper.data.api.AuthApi
 import com.example.gardenhelper.data.api.NetworkClient
 import com.example.gardenhelper.data.api.WeatherApi
@@ -44,10 +45,12 @@ class RetrofitNetworkClient(private val weatherApi: WeatherApi, private val auth
     ): Result<String> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = authApi.register(RegisterRequest(email, password, confirmPassword))
+                val request = RegisterRequest(email, password, confirmPassword)
+                val response = authApi.register(request)
 
+                Log.d("AuthDebug", response.message())
                 if (response.isSuccessful) {
-                    Result.Success(response.body()!!)
+                    Result.Success(response.body()!!.message)
                 } else {
                     val errorJson = response.errorBody()?.string()
                     val error = Gson().fromJson(errorJson, ErrorResponse::class.java)
@@ -57,6 +60,7 @@ class RetrofitNetworkClient(private val weatherApi: WeatherApi, private val auth
                     )
                 }
             } catch (e: Exception) {
+                Log.d("AuthDebug", "Message: ${e.message.toString()}")
                 Result.Error(message = e.message.toString(), code = 0)
             }
         }

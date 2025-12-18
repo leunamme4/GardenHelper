@@ -1,6 +1,7 @@
 package com.example.gardenhelper.data.api
 
 import com.example.gardenhelper.data.dto.auth.LoginRequest
+import com.example.gardenhelper.data.dto.auth.MessageResponse
 import com.example.gardenhelper.data.dto.auth.RegisterRequest
 import com.example.gardenhelper.data.dto.auth.TokenResponse
 import retrofit2.Response
@@ -14,7 +15,7 @@ interface AuthApi {
     @POST("register")
     suspend fun register(
         @Body request: RegisterRequest
-    ): Response<String>
+    ): Response<MessageResponse>
 
     @POST("login")
     suspend fun login(

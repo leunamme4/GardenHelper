@@ -1,6 +1,7 @@
 package com.example.gardenhelper.ui.settings.auth
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,16 +20,20 @@ class AuthViewModel(val serverRepository: ServerRepository, val context: Context
 
     fun register(email: String, password: String, confirmPassword: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("AuthDebug", "$email $password $confirmPassword")
             val result = serverRepository.register(email, password, confirmPassword)
             when(result) {
                 is Result.Error -> {
                     _registrationCompleted.postValue(false)
+                    Log.d("AuthDebug", "Result.Error")
                 }
                 Result.NetworkError -> {
                     _registrationCompleted.postValue(false)
+                    Log.d("AuthDebug", "Result.NetworkError")
                 }
                 is Result.Success<*> -> {
                     _registrationCompleted.postValue(true)
+                    Log.d("AuthDebug", "Result.Success")
                 }
             }
         }

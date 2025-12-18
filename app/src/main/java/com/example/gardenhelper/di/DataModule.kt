@@ -22,6 +22,7 @@ import com.example.gardenhelper.domain.api.repositories.NotesRepository
 import com.example.gardenhelper.domain.api.repositories.NotificationsRepository
 import com.example.gardenhelper.domain.api.repositories.ObjectsRepository
 import com.example.gardenhelper.domain.api.repositories.ServerRepository
+import com.google.gson.GsonBuilder
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -39,7 +40,7 @@ val dataModule = module {
     single<AuthApi> {
         Retrofit.Builder()
             .baseUrl("http://server:8080/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
             .build()
             .create(AuthApi::class.java)
     }
