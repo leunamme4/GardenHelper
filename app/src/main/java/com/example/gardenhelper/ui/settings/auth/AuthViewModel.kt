@@ -21,6 +21,7 @@ class AuthViewModel(val serverRepository: ServerRepository, val context: Context
     fun register(email: String, password: String, confirmPassword: String) {
         viewModelScope.launch(Dispatchers.IO) {
             Log.d("AuthDebug", "$email $password $confirmPassword")
+            // hi there
             val result = serverRepository.register(email, password, confirmPassword)
             when(result) {
                 is Result.Error -> {
